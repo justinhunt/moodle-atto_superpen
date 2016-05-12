@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Atto text editor integration version file.
+ * Atto superpen libfile.
  *
  * @package    atto_superpen
  * @copyright  COPYRIGHTINFO
@@ -32,10 +32,9 @@ defined('MOODLE_INTERNAL') || die();
 function atto_superpen_strings_for_js() {
     global $PAGE;
 
-    $PAGE->requires->strings_for_js(array('insert',
-                                          'cancel',
-                                          'enterflavor',
-                                          'dialogtitle'),
+    $PAGE->requires->strings_for_js(array('redpen',
+                                          'greenpen',
+                                          'bluepen'),
                                     'atto_superpen');
 }
 
@@ -44,29 +43,28 @@ function atto_superpen_strings_for_js() {
  * @return array of additional params to pass to javascript init function for this module.
  */
 function atto_superpen_params_for_js($elementid, $options, $fpoptions) {
-	global $USER, $COURSE;
-	//coursecontext
-	$coursecontext=context_course::instance($COURSE->id);	
+
+	//init pens visible flag
+	$redpenvisible=true;
+	$greenpenvisible=true;
+	$bluepenvisible=true;
+
 	
-	//usercontextid
-	$usercontextid=context_user::instance($USER->id)->id;
-	$disabled=false;
-	
-	//config our array of data
+	//if its visible in config don't show it.
+	//get config object
+	$config = get_config('atto_superpen');
+	$redpenvisible = $config->redpenvisible;
+    $greenpenvisible = $config->greenpenvisible;
+    $bluepenvisible = $config->bluepenvisible;
+	 
+
+	//config our array of data to pass to javascript
 	$params = array();
-	$params['usercontextid'] = $usercontextid;
+    $params['redpenvisible'] = $redpenvisible;
+    $params['greenpenvisible'] = $greenpenvisible;
+    $params['bluepenvisible'] = $bluepenvisible;
 
-		//If they don't have permission don't show it
-		if(!has_capability('atto/superpen:visible', $coursecontext) ){
-			$disabled=true;
-		 }
-        
-        //add our disabled param
-        $params['disabled'] = $disabled;
-        
-        //add our default flavor
-        $params['defaultflavor'] = get_config('atto_superpen','defaultflavor');
-
+    //return params array for use in js
     return $params;
 }
 

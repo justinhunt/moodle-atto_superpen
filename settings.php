@@ -29,7 +29,14 @@ $ADMIN->add('editoratto', new admin_category('atto_superpen', new lang_string('p
 
 $settings = new admin_settingpage('atto_superpen_settings', new lang_string('settings', 'atto_superpen'));
 if ($ADMIN->fulltree) {
-	// An option setting
-	$settings->add(new admin_setting_configtext('atto_superpen/defaultflavor', 
-		get_string('defaultflavor', 'atto_superpen'), '', 'vanilla', PARAM_TEXT));
+
+	$settings->add(new admin_setting_configcheckbox('atto_superpen/redpenvisible', 
+	   get_string('redpen', 'atto_superpen'),'', 1));
+	
+	$settings->add(new admin_setting_configcheckbox('atto_superpen/greenpenvisible', 
+	   get_string('greenpen', 'atto_superpen'),'', 1));
+	   
+	$settings->add(new admin_setting_configcheckbox('atto_superpen/bluepenvisible', 
+	   get_string('bluepen', 'atto_superpen'),'', 1));	
+	
 }

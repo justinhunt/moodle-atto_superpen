@@ -23,14 +23,13 @@
  */
 
 $string['createsuperpen'] = 'Create superpen';
-$string['pluginname'] = 'Superpen (Atto)';
-$string['settings'] = 'Superpen (Atto)';
-$string['browse'] = 'Browse';
+$string['pluginname'] = 'Superpen';
+$string['settings'] = 'Superpen';
 $string['visible'] = 'Visible';
-$string['nothingtoinsert'] = 'Nothing to insert!';
-$string['dialogtitle'] = 'Enter Preferences';
-$string['insert'] = 'Insert';
-$string['cancel'] = 'Cancel';
-$string['enterflavor'] = 'Enter Ice Cream Flavor';
-$string['defaultflavor'] = 'Default Ice Cream Flavor';
+$string['redpen'] = 'Red pen';
+$string['greenpen'] = 'Green pen';
+$string['bluepen'] = 'Blue pen';
+$string['nopen'] = 'No pen'; 
+$string['penstoshow'] = 'Pens to show';
+$string['penstoshowdetails'] = '';
 $string['superpen:visible'] = 'Visible';

@@ -35,29 +35,32 @@ var COMPONENTNAME = 'atto_superpen';
 
 Y.namespace('M.' + COMPONENTNAME).Button = Y.Base.create('button', Y.M.editor_atto.EditorPlugin, [], {
 
+
   
-	/**
+    /**
      * Initialize the button
      *
      * @method Initializer
      */
-    initializer: function() {
-        // If we don't have the capability to view then give up.
-        if (this.get('disabled')){
-            return;
-        }
+    initializer: function(config) {
+       
 
-        var theicons = ['bluepen', 'redpen', 'greenpen','nopen'];
+        var theicons = ['redpen', 'greenpen','bluepen','nopen'];
 
         Y.Array.each(theicons, function(theicon) {
-            // Add the superpen icon/buttons
-            this.addButton({
-                icon: 'ed/' + theicon,
-                iconComponent: COMPONENTNAME,
-                buttonName: theicon,
-                callback: this._applypenstyle,
-                callbackArgs: theicon
-            });
+              //check the param passed from PHP
+             // If the icon is available, add the button
+            if (config[theicon + 'visible']=='1' || theicon =='nopen'){
+                // Add the superpen icon/buttons
+                this.addButton({
+                    icon: 'ed/' + theicon,
+                    iconComponent: COMPONENTNAME,
+                    title: theicon,
+                    buttonName: theicon,
+                    callback: this._applypenstyle,
+                    callbackArgs: theicon
+                });
+            }
         }, this);
 
     },
@@ -69,23 +72,32 @@ Y.namespace('M.' + COMPONENTNAME).Button = Y.Base.create('button', Y.M.editor_at
      * @method applypenstyle
      */
     _applypenstyle: function(e,thepen) {
-    	var host = this.get('host');
-    	var selection =  host.getSelection();
-        // Save the current selection - we want to restore this.
+        //fetch our selection
+        var host = this.get('host');
+        var selection =  host.getSelection();
+        
+        //dealing with selected text is a tricky business
+        //the rangy helper class deals with that for us
+        //but we have to save and restore the selected range identifiers
         var savedSelection = window.rangy.saveSelection();
         
-        var redApplier =  window.rangy.createCssClassApplier("atto_superpen_redpen", true);
-        var greenApplier =  window.rangy.createCssClassApplier("atto_superpen_greenpen", true);
-        var blueApplier =  window.rangy.createCssClassApplier("atto_superpen_bluepen", true);
+        //we use the rangy helpers to handle the applying of css classes and
+        //and creation of span tags to do that, if necessary
+        var redApplier =  window.rangy.createCssClassApplier(COMPONENTNAME + "_redpen", true);
+        var greenApplier =  window.rangy.createCssClassApplier(COMPONENTNAME + "_greenpen", true);
+        var blueApplier =  window.rangy.createCssClassApplier(COMPONENTNAME + "_bluepen", true);
         
+        //if we don't have a selection, don't do anything
         if (selection) {
-        	redApplier.undoToSelection();
-        	greenApplier.undoToSelection();
-        	blueApplier.undoToSelection();
+            //remove any classes we applied to this selection previously
+            redApplier.undoToSelection();
+            greenApplier.undoToSelection();
+            blueApplier.undoToSelection();
+          //depending on the pen, apply the css class
           switch(thepen){
-           	  case 'redpen': redApplier.applyToSelection();break;
-        	  case 'greenpen': greenApplier.applyToSelection();break;
-        	  case 'bluepen': blueApplier.applyToSelection();break;
+              case 'redpen': redApplier.applyToSelection();break;
+              case 'greenpen': greenApplier.applyToSelection();break;
+              case 'bluepen': blueApplier.applyToSelection();break;
           }
         }
 
@@ -95,17 +107,17 @@ Y.namespace('M.' + COMPONENTNAME).Button = Y.Base.create('button', Y.M.editor_at
         // Mark the text as having been updated.
         this.markUpdated();
     }
-}, { ATTRS: {
-		disabled: {
-			value: false
-		},
+ //Javascript is a bit of a headspin in the way you declare functions, handlers
+ //and pass parameters. The ATTRS object is how we pass params from PHP to our JS
+}, {
+        redpenvisible: {
+            value: true
+        },
+        greenpenvisible: {
+            value: true
+        },
+        bluepenvisible: {
+            value: true
+        }
 
-		usercontextid: {
-			value: null
-		},
-
-		defaultflavor: {
-			value: ''
-		}
-	}
 });
