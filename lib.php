@@ -43,6 +43,7 @@ function atto_superpen_strings_for_js() {
  * @return array of additional params to pass to javascript init function for this module.
  */
 function atto_superpen_params_for_js($elementid, $options, $fpoptions) {
+	global $COURSE;
 
 	//init pens visible flag
 	$redpenvisible=true;
@@ -57,6 +58,19 @@ function atto_superpen_params_for_js($elementid, $options, $fpoptions) {
     $greenpenvisible = $config->greenpenvisible;
     $bluepenvisible = $config->bluepenvisible;
 	 
+					
+	//coursecontext
+	$coursecontext=context_course::instance($COURSE->id);	
+	//If they don't have permission for the pen don't show it
+	if(!has_capability('atto/superpen:redpenvisible', $coursecontext) ){
+			$redpenvisible=false;
+	}
+	if(!has_capability('atto/superpen:greenpenvisible', $coursecontext) ){
+			$greenpenvisible=false;
+	}
+	if(!has_capability('atto/superpen:bluepenvisible', $coursecontext) ){
+			$bluepenvisible=false;
+	}
 
 	//config our array of data to pass to javascript
 	$params = array();

@@ -33,3 +33,6 @@ $string['nopen'] = 'No pen';
 $string['penstoshow'] = 'Pens to show';
 $string['penstoshowdetails'] = '';
 $string['superpen:visible'] = 'Visible';
+$string['superpen:redpenvisible'] = 'Red pen visible';
+$string['superpen:greenpenvisible'] = 'Green pen visible';
+$string['superpen:bluepenvisible'] = 'Blue pen visible';
