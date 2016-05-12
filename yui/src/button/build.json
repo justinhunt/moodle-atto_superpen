@@ -1,0 +1,10 @@
+{
+    "name": "moodle-atto_superpen-button",
+    "builds": {
+        "moodle-atto_superpen-button": {
+            "jsfiles": [
+                "button.js"
+            ]
+        }
+    }
+}
