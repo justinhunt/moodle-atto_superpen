@@ -1,3 +1,4 @@
 .atto_superpen_redpen{color: red;font-style: bold;}
 .atto_superpen_greenpen{color: green;font-style: bold;}
 .atto_superpen_bluepen{color: blue;font-style: bold;}
+.atto_superpen_custompen{color: black;font-style: bold;border: 4px dashed; border-color: red;padding 5px;}

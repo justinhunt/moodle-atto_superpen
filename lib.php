@@ -34,7 +34,8 @@ function atto_superpen_strings_for_js() {
 
     $PAGE->requires->strings_for_js(array('redpen',
                                           'greenpen',
-                                          'bluepen'),
+                                          'bluepen',
+                                          'custompen'),
                                     'atto_superpen');
 }
 
@@ -49,6 +50,7 @@ function atto_superpen_params_for_js($elementid, $options, $fpoptions) {
 	$redpenvisible=true;
 	$greenpenvisible=true;
 	$bluepenvisible=true;
+	$custompenvisible=true;
 
 	
 	//if its visible in config don't show it.
@@ -57,6 +59,7 @@ function atto_superpen_params_for_js($elementid, $options, $fpoptions) {
 	$redpenvisible = $config->redpenvisible;
     $greenpenvisible = $config->greenpenvisible;
     $bluepenvisible = $config->bluepenvisible;
+    $custompenvisible = $config->custompenvisible;
 	 
 					
 	//coursecontext
@@ -72,12 +75,16 @@ function atto_superpen_params_for_js($elementid, $options, $fpoptions) {
 	if(!has_capability('atto/superpen:bluepenvisible', $coursecontext) ){
 			$bluepenvisible=false;
 	}
+	if(!has_capability('atto/superpen:custompenvisible', $coursecontext) ){
+			$custompenvisible=false;
+	}
 
 	//config our array of data to pass to javascript
 	$params = array();
     $params['redpenvisible'] = $redpenvisible;
     $params['greenpenvisible'] = $greenpenvisible;
     $params['bluepenvisible'] = $bluepenvisible;
+    $params['custompenvisible'] = $custompenvisible;
 
     //return params array for use in js
     return $params;

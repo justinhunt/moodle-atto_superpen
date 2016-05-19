@@ -38,5 +38,11 @@ if ($ADMIN->fulltree) {
 	   
 	$settings->add(new admin_setting_configcheckbox('atto_superpen/bluepenvisible', 
 	   get_string('bluepen', 'atto_superpen'),'', 1));	
+	   
+	$settings->add(new admin_setting_configcheckbox('atto_superpen/custompenvisible', 
+	   get_string('custompen', 'atto_superpen'),'', 1));	
+	   
+	$settings->add(new admin_setting_configtext('atto_superpen/custompenclass', 
+		get_string('custompenclass', 'atto_superpen'), '', , PARAM_TEXT)); 
 	
 }

@@ -48,6 +48,7 @@ Y.namespace('M.' + COMPONENTNAME).Button = Y.Base.create('button', Y.M.editor_at
        
 
         var theicons = ['redpen', 'greenpen','bluepen','nopen'];
+        debugger;
 
         Y.Array.each(theicons, function(theicon) {
               //check the param passed from PHP
