@@ -1,4 +1,4 @@
-yui/src/button/js// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -48,7 +48,7 @@ Y.namespace('M.' + COMPONENTNAME).Button = Y.Base.create('button', Y.M.editor_at
         var theicons = ['redpen', 'greenpen','bluepen','custompen','nopen'];
 		
 		//save the custom pen class for later use.
-        this._custompenclass = config['custompenclass'];
+        this._custompenclass = config.custompenclass;
 
         Y.Array.each(theicons, function(theicon) {
               //check the param passed from PHP
@@ -89,7 +89,7 @@ Y.namespace('M.' + COMPONENTNAME).Button = Y.Base.create('button', Y.M.editor_at
         var redApplier =  window.rangy.createCssClassApplier(COMPONENTNAME + "_redpen", true);
         var greenApplier =  window.rangy.createCssClassApplier(COMPONENTNAME + "_greenpen", true);
         var blueApplier =  window.rangy.createCssClassApplier(COMPONENTNAME + "_bluepen", true);
-        var customApplier =  window.rangy.createCssClassApplier(Cthis._custompenclass, true);
+        var customApplier =  window.rangy.createCssClassApplier(this._custompenclass, true);
         
         //if we don't have a selection, don't do anything
         if (selection) {

@@ -43,6 +43,6 @@ if ($ADMIN->fulltree) {
 	   get_string('custompen', 'atto_superpen'),'', 1));	
 	   
 	$settings->add(new admin_setting_configtext('atto_superpen/custompenclass', 
-		get_string('custompenclass', 'atto_superpen'), '', , PARAM_TEXT)); 
+		get_string('custompenclass', 'atto_superpen'), '', 'atto_superpen_custompen', PARAM_TEXT)); 
 	
 }

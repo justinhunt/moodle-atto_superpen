@@ -60,6 +60,7 @@ function atto_superpen_params_for_js($elementid, $options, $fpoptions) {
     $greenpenvisible = $config->greenpenvisible;
     $bluepenvisible = $config->bluepenvisible;
     $custompenvisible = $config->custompenvisible;
+    $custompenclass = $config->custompenclass;
 	 
 					
 	//coursecontext
@@ -85,6 +86,7 @@ function atto_superpen_params_for_js($elementid, $options, $fpoptions) {
     $params['greenpenvisible'] = $greenpenvisible;
     $params['bluepenvisible'] = $bluepenvisible;
     $params['custompenvisible'] = $custompenvisible;
+    $params['custompenclass'] = $custompenclass;
 
     //return params array for use in js
     return $params;
